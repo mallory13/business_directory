@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Article = require('../models/article');
+var Directory = require('../models/directory');
 var passport = require('passport');
 
 // set up the GET handler for the main articles page
 router.get('/', isLoggedIn, function(req, res, next) {
     // use the Article model to retrieve all articles
-    Article.find(function (err, articles) {
+    Directory.find(function (err, directory) {
         // if we have an error
         if (err) {
             console.log(err);
@@ -17,10 +17,10 @@ router.get('/', isLoggedIn, function(req, res, next) {
         else {
             // we got data back
             // show the view and pass the data to it
-            res.render('articles/index', {
+            res.render('businesses/directory', {
 
-                title: 'Articles',
-                articles: articles
+                title: 'Business Directory'
+           
             });
         }
     });
@@ -28,8 +28,8 @@ router.get('/', isLoggedIn, function(req, res, next) {
 
 // GET handler for add to display a blank form
 router.get('/add',isLoggedIn, function(req, res, next) {
-    res.render('articles/add', {
-        title: 'Add a New Article'
+    res.render('businesses/add', {
+        title: 'Add a New Business'
     });
 });
 
@@ -37,14 +37,17 @@ router.get('/add',isLoggedIn, function(req, res, next) {
 router.post('/add', function(req, res, next) {
 
     // save a new article using our Article model and mongoose
-    Article.create( {
-            title: req.body.title,
-            content: req.body.content
+    Directory.create( {
+            name: req.body.name,
+            contact: req.body.contact,
+            phone: req.body.phone,
+            address: req.body.address,
+            website: req.body.website,
         }
     );
 
     // redirect to main articles page
-    res.redirect('/articles');
+    res.redirect('/directory');
 });
 
 // GET handler for edit to show the populated form
@@ -60,9 +63,8 @@ router.get('/:id', isLoggedIn, function(req, res, next) {
        }
         else {
            // show the edit view
-           res.render('articles/edit', {
-               title: 'Article Details',
-               article: article
+           res.render('businesses/edit', {
+               title: 'Business Details'
            });
        }
     });
@@ -74,20 +76,23 @@ router.post('/:id', function(req, res, next) {
     var id = req.params.id;
 
     // fill the article object
-    var article = new Article( {
+    var directory = new Directory( {
         _id: id,
-        title: req.body.title,
-        content: req.body.content
+        name: req.body.name,
+        contact: req.body.contact,
+        phone: req.body.phone,
+        address: req.body.address,
+        website: req.body.website,
     });
 
     // use mongoose and our Article model to update
-    Article.update( { _id: id }, article,  function(err) {
+    Directory.update( { _id: id }, directory,  function(err) {
         if (err) {
             console.log(err)
             res.end(err);
         }
         else {
-            res.redirect('/articles');
+            res.redirect('/directory');
         }
     });
 });
@@ -99,14 +104,14 @@ router.get('/delete/:id', isLoggedIn, function(req, res, next) {
 
     console.log('trying to delete');
 
-    Article.remove({ _id: id }, function(err) {
+    Directory.remove({ _id: id }, function(err) {
         if (err) {
             console.log(err);
             res.end(err);
         }
         else {
             // show updated articles list
-            res.redirect('/articles');
+            res.redirect('/directory');
         }
     });
 });

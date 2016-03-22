@@ -54,9 +54,10 @@ router.get('/register', function(req, res, next) {
 
 
 //GET welcome page for authenticated users
-router.get('/welcome', function(req, res, next) {
+router.get('/welcome', isLoggedIn, function(req, res, next) {
    res.render('auth/welcome', {
     title: 'Welcome'
+    user: req.user
    });
 });
 
@@ -64,12 +65,12 @@ router.get('/welcome', function(req, res, next) {
 
 //POST register - save new user
 router.post('/register', function(req, res, next){
-   Directory.register(new Account({ username: req.body.username }), req.body.password, function(err, account) {
+   Directory.register(new Directory({ username: req.body.username }), req.body.password, function(err, account) {
       if (err) {
          res.render('auth/register', {title: 'Register'});
       }
       else {
-         req.login(account, function(err) {
+         req.login(business, function(err) {
             res.redirect('/directory');
          });
       }
@@ -86,13 +87,22 @@ router.get('/login', function(req, res, next) {
     //clear the messages
         req.session.messages = [];
     
-    res.render('auth/login', {
+    //check if user is already logged in
+    if(req.isAuthenticated){
+        res.redirect('/auth/welcome');
+    }
+    else{
+        
+        //show the login page and pass in any messages we may have
+        res.render('auth/login', {
         title: 'Login',
         user: req.user,
-        messages: messages
-        
-        
+        messages: messages     
     });
+    }
+    
+    
+    
     
     //clear out session messages after otherwise the message array keeps getting added on to everytime
     req.session.messages = []

@@ -1,0 +1,20 @@
+<%- include ../partials/header.ejs %>
+
+<main class="container">
+    <h1>Business Directory</h1>
+
+    <a href="/directory/add" title="Add Business">Add a new Business</a>
+
+    <ul class="list-group">
+        <% for (var i = 0; i < articles.length; i++) { %>
+            <li class="list-group-item">
+                <!-- link to /directory/:id -->
+                <a href="/directory/<%= directory[i]._id%>" title="Read More">
+                    <%= directory[i].name %></a>
+            </li>
+        <% } %>
+    </ul>
+</main>
+
+</body>
+</html>

@@ -4,7 +4,7 @@ var router = express.Router();
 //add auth package refs
 var passport = require('passport');
 var mongoose = require('mongoose');
-var Account = require('../models/account');
+var Directory = require('../models/directory');
 var gitHub = require('passport-github2');
 var configDb = require('../config/db.js');
 
@@ -53,15 +53,24 @@ router.get('/register', function(req, res, next) {
 });
 
 
+//GET welcome page for authenticated users
+router.get('/welcome', function(req, res, next) {
+   res.render('auth/welcome', {
+    title: 'Welcome'
+   });
+});
+
+
+
 //POST register - save new user
 router.post('/register', function(req, res, next){
-   Account.register(new Account({ username: req.body.username }), req.body.password, function(err, account) {
+   Directory.register(new Account({ username: req.body.username }), req.body.password, function(err, account) {
       if (err) {
          res.render('auth/register', {title: 'Register'});
       }
       else {
          req.login(account, function(err) {
-            res.redirect('/articles');
+            res.redirect('/directory');
          });
       }
    }); 

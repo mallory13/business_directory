@@ -1,0 +1,29 @@
+<%- include ../partials/header.ejs %>
+
+<main class="container">
+    <h1>Login</h1>
+
+    <% if (messages.length > 0) { %>
+        <div class="alert alert-danger"><%= messages %></div>
+        <% } %>
+
+
+    <form method="post" action="/auth/login">
+        <fieldset>
+            <label for="username" class="col-sm-2">Username: *</label>
+            <input name="username" id="username" required />
+        </fieldset>
+        <fieldset>
+            <label for="password" class="col-sm-2">Password: *</label>
+            <input name="password" id="password" type="password" required />
+        </fieldset>
+
+        <button class="btn btn-primary col-sm-offset-2">Login</button>
+        <a href="auth/github" title="Login with Github"><img src="/images/github.png" alt="github" /></a>
+        <hr />
+        Need access?  <a href="/auth/register" title="Register">Register</a>
+    </form>
+
+</main>
+
+<%- include ../partials/footer.ejs %>

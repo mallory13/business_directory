@@ -1,0 +1,26 @@
+<%- include ../partials/header.ejs %>
+
+<main class="container">
+    <h1>Register</h1>
+
+    <form method="post" action="/auth/register">
+        <fieldset>
+            <label for="username" class="col-sm-2">Username: *</label>
+            <input name="username" id="username" required />
+        </fieldset>
+        <fieldset>
+            <label for="password" class="col-sm-2">Password: *</label>
+            <input name="password" id="password" type="password" required />
+        </fieldset>
+        <fieldset>
+            <label for="confirm" class="col-sm-2">Confirm: *</label>
+            <input name="confirm" id="confirm" type="password" required />
+        </fieldset>
+        <button class="btn btn-primary col-sm-offset-2">Register</button>
+        <hr />
+        Already have an account?  <a href="/auth/login" title="Login">Login</a>
+    </form>
+
+</main>
+
+<%- include ../partials/footer.ejs %>

@@ -1,0 +1,26 @@
+<%- include ../partials/header.ejs %>
+
+<main class="container">
+    <h1>Article Details</h1>
+    <form method="post" action="<%= article._id %>">
+        <fieldset class="form-group">
+            <label for="title" class="col-sm-2">Title: *</label>
+            <input name="title" id="title" required value="<%= article.title %>" />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="content" class="col-sm-2">Content: *</label>
+            <textarea name="content" id="content" required><%= article.content %>
+            </textarea>
+        </fieldset>
+        <div>
+            <%= article.created %>
+        </div>
+        <button class="btn btn-primary col-sm-offset-2">Save</button>
+
+        <a href="/articles/delete/<%= article._id %>" title="Delete" class="confirmation">
+            <button class="btn btn-danger" type="button">Delete</button>
+        </a>
+    </form>
+</main>
+
+<%- include ../partials/footer.ejs %>

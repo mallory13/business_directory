@@ -3,12 +3,13 @@ var router = express.Router();
 
 var mongoose = require('mongoose');
 var Directory = require('../models/directory');
+var Business = require('../models/business');
 var passport = require('passport');
 
 // set up the GET handler for the directories page
 router.get('/', isLoggedIn, function(req, res, next) {
     // use the Business model to retrieve all businesses
-    Directory.find(function (err, directory) {
+    Business.find(function (err, business) {
         // if we have an error
         if (err) {
             console.log(err);
@@ -17,7 +18,7 @@ router.get('/', isLoggedIn, function(req, res, next) {
         else {
             // we got data back
             // show the view and pass the data to it
-            res.render('businesses/directory', {
+            res.render('businesses/business', {
 
                 title: 'Business Directory'
            
@@ -37,7 +38,7 @@ router.get('/add',isLoggedIn, function(req, res, next) {
 router.post('/add', function(req, res, next) {
 
     // save a new business using our Business model and mongoose
-    Directory.create( {
+    Business.create( {
             name: req.body.name,
             contact: req.body.contact,
             phone: req.body.phone,
@@ -56,7 +57,7 @@ router.get('/:id', isLoggedIn, function(req, res, next) {
     var id = req.params.id;
 
     // look up the selected business
-    Directory.findById(id,  function(err, directory) {
+    Business.findById(id,  function(err, business) {
        if (err) {
            console.log(err);
            res.end(err);
@@ -76,7 +77,7 @@ router.post('/:id', function(req, res, next) {
     var id = req.params.id;
 
     // fill the business object
-    var directory = new Directory( {
+    var business = new Business( {
         _id: id,
         name: req.body.name,
         contact: req.body.contact,
@@ -85,14 +86,15 @@ router.post('/:id', function(req, res, next) {
         website: req.body.website,
     });
 
-    // use mongoose and our Directory model to update
-    Directory.update( { _id: id }, directory,  function(err) {
+    
+    //update business directory with mongoose
+    Business.update( { _id: id }, business,  function(err) {
         if (err) {
             console.log(err)
             res.end(err);
         }
         else {
-            res.redirect('/directory');
+            res.redirect('/business');
         }
     });
 });
@@ -104,14 +106,14 @@ router.get('/delete/:id', isLoggedIn, function(req, res, next) {
 
     console.log('trying to delete');
 
-    Directory.remove({ _id: id }, function(err) {
+    Business.remove({ _id: id }, function(err) {
         if (err) {
             console.log(err);
             res.end(err);
         }
         else {
             // show updated directory of businesses 
-            res.redirect('/directory');
+            res.redirect('/business');
         }
     });
 });

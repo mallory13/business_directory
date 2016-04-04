@@ -45,13 +45,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// use the Account model we built
-var Account = require('./models/account');
-passport.use(Account.createStrategy());
+// use the Directory model 
+var Directory = require('./models/directory');
+passport.use(Directory.createStrategy());
 
 // methods for accessing the session data
-passport.serializeUser(Account.serializeUser);
-passport.deserializeUser(Account.deserializeUser);
+passport.serializeUser(Directory.serializeUser);
+passport.deserializeUser(Directory.deserializeUser);
 
 app.use('/', routes);
 app.use('/users', users);

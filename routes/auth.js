@@ -56,7 +56,7 @@ router.get('/register', function(req, res, next) {
 //GET welcome page for authenticated users
 router.get('/welcome', isLoggedIn, function(req, res, next) {
    res.render('auth/welcome', {
-    title: 'Welcome'
+    title: 'Welcome',
     user: req.user
    });
 });
@@ -70,7 +70,7 @@ router.post('/register', function(req, res, next){
          res.render('auth/register', {title: 'Register'});
       }
       else {
-         req.login(business, function(err) {
+         req.login(Directory, function(err) {
             res.redirect('/directory');
          });
       }

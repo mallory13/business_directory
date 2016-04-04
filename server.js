@@ -7,6 +7,8 @@
 var app = require('./app');
 var debug = require('debug')('node_project2:server');
 var http = require('http');
+var uid = require('uid2');  
+var mime = require('mime'); 
 
 /**
  * Get port from environment and store in Express.

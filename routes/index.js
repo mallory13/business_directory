@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', {
       title: 'Home page',
-        message: 'Content will go here'});
+        message: 'Get your business noticed today. Add it to our business directory!'});
 });
 
 

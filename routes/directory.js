@@ -57,6 +57,7 @@ router.post('/add', function(req, res, next) {
             phone: req.body.phone,
             address: req.body.address,
             website: req.body.website,
+            file: req.body.file
         }
     );
 
@@ -103,6 +104,7 @@ router.post('/:id', function(req, res, next) {
         phone: req.body.phone,
         address: req.body.address,
         website: req.body.website,
+        file: req.body.file
     });
 
     

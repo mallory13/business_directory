@@ -60,8 +60,8 @@ router.post('/add', function(req, res, next) {
         }
     );
 
-    // redirect to main directory page
-    res.redirect('/directory');
+    // redirect to main business page
+    res.redirect('/business');
 });
 
 // GET handler for edit to show the populated form

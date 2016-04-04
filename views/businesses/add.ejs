@@ -2,7 +2,7 @@
 
 <main class="container">
     <h1>Business Directories</h1>
-    <form method="post" action="add">
+    <form method="post" action="add" enctype="multipart/form-data">
         <fieldset class="form-group">
             <label for="busName" class="col-sm-2">Business Name: *</label>
             <input name="busName" id="busName" required />
@@ -22,6 +22,12 @@
         <fieldset class="form-group">
             <label for="website" class="col-sm-2">Website: *</label>
             <input name="website" id="website" required />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="file">Select your image:</label>
+            <input type="file" name="file" id="file" />
+            <span class="hint">Supported files: jpg, jpeg, png.</span>
+            <button type="submit">upload</button>
         </fieldset>
         <button class="btn btn-primary col-sm-offset-2">Save</button>
     </form>

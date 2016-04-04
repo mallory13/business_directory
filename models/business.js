@@ -1,7 +1,7 @@
 // link to mongoose
 var mongoose = require('mongoose');
 
-// define the article schema
+// define the business schema
 var businessSchema = new mongoose.Schema({
    created: {
        type: Date,

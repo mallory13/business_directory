@@ -15,7 +15,7 @@ var localStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var articles = require('./routes/articles');
+var directory = require('./routes/directory');
 var auth = require('./routes/auth');
 
 var app = express();
@@ -37,7 +37,7 @@ app.use(flash());
 
 // passport config section
 app.use(session({
-  secret: 'lesson8 auth',
+  secret: 'node_project2 auth',
   resave: true,
   saveUninitialized: false
 }));

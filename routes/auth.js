@@ -113,7 +113,7 @@ router.get('/login', function(req, res, next) {
 //authenticate method belongs to passport - local means users are stored in some kind of database
 //flash allows us to use the failure message
 router.post('/login', passport.authenticate('local', {
-   successRedirect: '/articles',
+   successRedirect: '/directory',
    failureRedirect: 'auth/login',
    failureMessage: 'Invalid Login'
 }));

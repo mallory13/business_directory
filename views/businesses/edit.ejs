@@ -23,6 +23,12 @@
             <label for="website" class="col-sm-2">Website: *</label>
             <input name="website" id="website" required />
         </fieldset>
+        <fieldset class="form-group">
+            <label for="file">Select your image:</label>
+            <input type="file" name="file" id="file" />
+            <span class="hint">Supported files: jpg, jpeg, png.</span>
+            <button type="submit">upload</button>
+        </fieldset>
         <div>
             <%= directory.created %>
         </div>

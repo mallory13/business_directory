@@ -36,6 +36,10 @@ var businessSchema = new mongoose.Schema({
         trim: true
        
     },
+    file: {
+        type: File,
+        default: ''   
+    }
 });
 
 // make it public

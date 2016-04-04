@@ -46,7 +46,7 @@ router.post('/add', function(req, res, next) {
         }
     );
 
-    // redirect to main articles page
+    // redirect to main directory page
     res.redirect('/directory');
 });
 
@@ -56,7 +56,7 @@ router.get('/:id', isLoggedIn, function(req, res, next) {
     var id = req.params.id;
 
     // look up the selected business
-    Directory.findById(id,  function(err, article) {
+    Directory.findById(id,  function(err, directory) {
        if (err) {
            console.log(err);
            res.end(err);
@@ -110,7 +110,7 @@ router.get('/delete/:id', isLoggedIn, function(req, res, next) {
             res.end(err);
         }
         else {
-            // show updated articles list
+            // show updated directory of businesses 
             res.redirect('/directory');
         }
     });

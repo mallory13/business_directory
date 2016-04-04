@@ -39,4 +39,4 @@ var businessSchema = new mongoose.Schema({
 });
 
 // make it public
-module.exports = mongoose.model('Article', articleSchema);
+module.exports = mongoose.model('Business', businessSchema);

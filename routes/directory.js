@@ -7,7 +7,8 @@ var Business = require('../models/business');
 var passport = require('passport');
 
 // set up the GET handler for the directories page
-router.get('/', isLoggedIn, function(req, res, next) {
+router.get('/', function(req, res, next) {
+    if(req.isAuthenticated()){
     // use the Business model to retrieve all businesses
     Business.find(function (err, business) {
         // if we have an error
@@ -25,13 +26,25 @@ router.get('/', isLoggedIn, function(req, res, next) {
             });
         }
     });
+    }
+    else{
+        //redirect to login page
+        res.redirect('/auth/login');
+    }
 });
 
 // GET handler for add to display a blank form
-router.get('/add',isLoggedIn, function(req, res, next) {
+router.get('/add',function(req, res, next) {
+    if(req.isAuthenticated()){
+      
     res.render('businesses/add', {
         title: 'Add a New Business'
     });
+    }
+    else{
+        //redirect to login page
+        res.redirect('/auth/login');
+    }
 });
 
 // POST handler for add to process the form
@@ -52,7 +65,8 @@ router.post('/add', function(req, res, next) {
 });
 
 // GET handler for edit to show the populated form
-router.get('/:id', isLoggedIn, function(req, res, next) {
+router.get('/:id', function(req, res, next) {
+    if(req.isAuthenticated()){
    // create an id variable to store the id from the url
     var id = req.params.id;
 
@@ -69,6 +83,11 @@ router.get('/:id', isLoggedIn, function(req, res, next) {
            });
        }
     });
+    }
+    else{
+        //redirect to login page
+        res.redirect('/auth/login');
+    }
 });
 
 // POST handler for edit to update the business
@@ -100,7 +119,8 @@ router.post('/:id', function(req, res, next) {
 });
 
 // GET handler for delete using the business id parameter
-router.get('/delete/:id', isLoggedIn, function(req, res, next) {
+router.get('/delete/:id', function(req, res, next) {
+    if(req.isAuthenticated()){
    // grab the id parameter from the url
     var id = req.params.id;
 
@@ -115,21 +135,15 @@ router.get('/delete/:id', isLoggedIn, function(req, res, next) {
             // show updated directory of businesses 
             res.redirect('/business');
         }
+    
     });
-});
-
-
-//auth check
-function isLoggedIn(req, res, next){
-    //is the user authenticated?
-    if(req.isAuthenticated()){
-        //if it is go to the next part of the request
-        return next;
     }
     else{
+        //redirect to login page
         res.redirect('/auth/login');
     }
-}
+});
+
 
 // make public
 module.exports = router;

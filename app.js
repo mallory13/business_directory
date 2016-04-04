@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //connect images to writable
-app.use('/images', express.static(__dirname + '/writable'));
+app.use('/images', express.static(__dirname + './writable'));
 
 //Define routes
 app.get('/', controllers.index);  

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
-// create the account schema
+// create the directory schema for users
 var Directory = new schema({
     username: String,
     password: String,
